@@ -9,7 +9,21 @@
     }
 
 </style>
-<div class="container d-flex flex-row align-items-center justify-content-center" style="height:80vh;">
+<div class="container d-flex flex-column align-items-center justify-content-center" style="height:80vh;">
+    @if (Session["mensajeError"] != null)
+    {
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>@Session["mensajeError"]!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div></div>
+    }
     <div class="card" style="-webkit-box-shadow: -1px 2px 16px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: -1px 2px 16px 0px rgba(0,0,0,0.75);
         box-shadow: -1px 2px 16px 0px rgba(0,0,0,0.75);">
@@ -20,11 +34,11 @@
 
                     <div class="form-group">
                         <label for="exampleInputUsuario">Usuario</label>
-                        <input type="text" class="form-control" id="exampleInputUsuario">
+                        <input type="text" class="form-control" id="exampleInputUsuario" name="InputNombre">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputContraseña">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputContraseña">
+                        <input type="password" class="form-control" id="exampleInputContraseña" name="InputPassword">
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Ingresar</button>

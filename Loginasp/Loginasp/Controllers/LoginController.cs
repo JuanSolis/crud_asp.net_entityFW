@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Loginasp.Models;
+using Loginasp.Util;
 
 namespace Loginasp.Controllers
 {
@@ -11,19 +13,37 @@ namespace Loginasp.Controllers
         // GET: Login
         public ActionResult Index()
         {
+
             return View();
         }
 
 
         // POST: Login/Create
         [HttpPost]
-        public ActionResult Index(FormCollection collection)
+        public ActionResult Index(FormCollection datosObtenidos)
         {
             try
             {
-                // TODO: Add insert logic here
-                
-                return RedirectToAction("Index");
+
+                string usuario = datosObtenidos["InputNombre"];
+                string password = datosObtenidos["InputPassword"];
+
+                Usuario nuevoUsuario = new Usuario();
+                nuevoUsuario.nombreUsuario = usuario;
+                nuevoUsuario.password = password;
+
+                if (nuevoUsuario.verificarUsuario())
+                {
+                    Storage.Instance.listadoUsuarios.Add(nuevoUsuario);
+                    Session["mensaje"] = "Usuario Registrado";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    Session["mensajeError"] = "El usuario ya existe";
+                    return RedirectToAction("Index");
+                }
+
             }
             catch
             {
