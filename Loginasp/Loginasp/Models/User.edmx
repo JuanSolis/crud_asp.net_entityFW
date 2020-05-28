@@ -15,8 +15,9 @@
           <Property Name="nombre_completo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="foto_path" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="foto_path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edad" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="UsuariosDBModelStoreContainer">
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -38,8 +39,9 @@
           <Property Name="nombre_completo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="foto_path" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="foto_path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edad" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -50,6 +52,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="UsuariosDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="edad" ColumnName="edad" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="foto_path" ColumnName="foto_path" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />

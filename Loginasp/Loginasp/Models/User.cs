@@ -22,5 +22,6 @@ namespace Loginasp.Models
         public string direccion { get; set; }
         public string foto_path { get; set; }
         public int id { get; set; }
+        public int edad { get; set; }
     }
 }
