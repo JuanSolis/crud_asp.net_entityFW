@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Loginasp.Util
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
@@ -17,7 +18,15 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link active">@Html.ActionLink("Registro", "Registro", "Registro")</a>
+                @if (Storage.Instance.usuarioLogueado != null)
+                {
+                    <a class="nav-item nav-link active">@Html.ActionLink("LogOut", "CerrarSesion", "Login")</a>
+                }
+                else
+                {
+                    <a class="nav-item nav-link active">@Html.ActionLink("Login", "Index", "Login")</a>
+                }
+                
             </div>
         </div>
     </nav>

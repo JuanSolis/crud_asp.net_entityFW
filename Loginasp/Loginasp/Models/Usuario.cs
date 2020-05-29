@@ -40,6 +40,22 @@ namespace Loginasp.Models
 
             return encoded;
         }
+
+        public bool validarUsuario(User usuarioEncontrado, string password)
+        {
+            string hashPassword = crearHash(password, usuarioEncontrado.helper);
+
+            if (usuarioEncontrado.hash == hashPassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
     }
 
     [MetadataType(typeof(Usuario))]

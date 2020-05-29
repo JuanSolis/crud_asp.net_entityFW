@@ -1,20 +1,20 @@
 ﻿@model Loginasp.Models.User
 
 @{
-    ViewBag.Title = "vistaRegistro";
+    ViewBag.Title = "Perfil";
 }
 
-<h2>Registro</h2>
+<h2>Perfil</h2>
 
-@using (Html.BeginForm("Registro", "Registro", FormMethod.Post, new
+@using (Html.BeginForm("Perfil", "Usuarios", FormMethod.Post, new
 {
     enctype = "multipart/form-data"
-})) 
+}))
 {
     @Html.AntiForgeryToken()
 
-    <!-- Input de Correo -->
 <div class="form-horizontal">
+    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -24,23 +24,13 @@
         </div>
     </div>
 
-    <!-- Input de password -->
     <div class="form-group">
-        <label class="control-label col-2" for="InputPassword">contraseña</label>
+        @Html.LabelFor(model => model.edad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="password" name="password" class="form-control" id="InputPassword" required />
+            @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @class = "form-control", min = "0" } })
+            @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <!-- Input de verificar password  -->
-    <div class="form-group">
-        <label class="control-label col-2" for="InputPasswordVerificar">contraseña</label>
-        <div class="col-md-10">
-            <input type="password" name="passwordVerificacion" class="form-control" id="InputPasswordVerificar" required />
-        </div>
-    </div>
-
-    <!-- Input de nombre Completo  -->
 
     <div class="form-group">
         @Html.LabelFor(model => model.nombre_completo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,28 +40,15 @@
         </div>
     </div>
 
-    <!-- Input de Edad  -->
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.edad, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @class = "form-control" , min="0"} })
-            @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
     <!-- Input de pais  -->
     <div class="form-group">
         <label for="comboPais" class="control-label col-md-2">Pais</label>
         <div class="col-md-10">
-            <select class="form-control" id="comboPais" name="pais" required>
-
-            </select>
+            <select class="form-control" id="comboPais" name="pais" required></select>
             @Html.ValidationMessageFor(model => model.pais, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <!-- Input de direccion -->
 
     <div class="form-group">
         @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -82,21 +59,28 @@
     </div>
 
 
-    <!-- Input de direccion -->
+    <!-- Input de imagen -->
 
-    <div class="form-group">
+    <div class="form-group d-flex flex-column">
         <div class="col-md-10">
             <input type="file" name="image" class="form-control-file" accept="image/*" required />
         </div>
+        <div class="col-md-2 mt-3 d-flex align-items-center">
+            <img src="@Model.foto_path" class="rounded float-left" alt="foto Usuario" width = "100%" height ="50%" style="object-fit:cover">
+            <p>Imagen actual</p>
+        </div>
+
+       
     </div>
 
 
+    @Html.HiddenFor(model => model.id)
 
-    <!-- button para enviar -->
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary btn-block" />
+            <input type="submit" value="Editar" class="btn btn-primary btn-block" />
         </div>
     </div>
 </div>

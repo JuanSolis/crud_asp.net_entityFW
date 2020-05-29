@@ -28,7 +28,8 @@ namespace Loginasp.Util
 
         }
 
-        public List<Usuario> listadoUsuarios = new List<Usuario>();
+        public User usuarioLogueado;
+
 
     }
 }

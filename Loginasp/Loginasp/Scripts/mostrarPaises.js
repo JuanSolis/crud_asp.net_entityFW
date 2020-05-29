@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿    $(document).ready(function () {
 
     var selects = "";
     $(paises).each(function (indice, elemento) {
