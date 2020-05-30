@@ -46,6 +46,7 @@ namespace Loginasp.Controllers
                 path = Path.Combine(Server.MapPath("~/assets/fotos"), imageName);
                 image.SaveAs(path);
                 nuevoUsuario.foto_path = ("/assets/fotos/" + imageName);
+                
             }
 
             // Crea la 'Sal' para la contraseña

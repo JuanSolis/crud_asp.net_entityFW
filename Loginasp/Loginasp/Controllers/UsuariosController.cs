@@ -5,15 +5,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Loginasp.Models;
+using Loginasp.Util;
 
 namespace Loginasp.Controllers
 {
     public class UsuariosController : Controller
     {
         // GET: Usuarios
+        
         public ActionResult Index()
         {
-
+            if (Storage.Instance.usuarioLogueado == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             List<User> listaUsuarios = new List<User>();
             using (UsuariosDBEntities db = new UsuariosDBEntities())
             {
@@ -22,9 +27,13 @@ namespace Loginasp.Controllers
 
             return View(listaUsuarios);
         }
-
+    
         public ActionResult Perfil(int id)
         {
+            if (Storage.Instance.usuarioLogueado == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             User usuarioAEditar = new User();
 
             using (UsuariosDBEntities db = new UsuariosDBEntities())
@@ -46,7 +55,6 @@ namespace Loginasp.Controllers
             var path = string.Empty;
 
 
-
             using (UsuariosDBEntities db = new UsuariosDBEntities())
             {
                 
@@ -66,11 +74,10 @@ namespace Loginasp.Controllers
                     {
 
                         usuarioEncontrado.correo = usuarioActualizado.correo;
-                        usuarioEncontrado.direccion = usuarioActualizado.correo;
+                        usuarioEncontrado.direccion = usuarioActualizado.direccion;
                         usuarioEncontrado.edad = usuarioActualizado.edad;
                         usuarioEncontrado.nombre_completo = usuarioActualizado.nombre_completo;
                         usuarioEncontrado.pais = usuarioActualizado.pais;
-                        usuarioEncontrado.direccion = usuarioActualizado.direccion;
                         db.SaveChanges();
 
                         return RedirectToAction("Index", "Home");
